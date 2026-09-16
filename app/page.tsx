@@ -35,10 +35,16 @@ import { BeforeAfter } from "@/src/components/site/BeforeAfter";
 import { cn } from "@/src/lib/utils";
 
 
-const PHONE = "+375 29 723-75-25";
-const PHONE_RAW = "+375297237525";
+const PHONE_MTS = "+375 29 723-75-25";
+const PHONE_MTS_RAW = "+375297237525";
+const PHONE_A1 = "+375 29 109-48-20";
+const PHONE_A1_RAW = "+375291094820";
 const WA = "https://wa.me/375297237525";
 const VIBER = "viber://chat?number=%2B375297237525";
+const TELEGRAM = "https://t.me/remontpodkluch_polotck";
+const TELEGRAM_BUILD = "https://t.me/RemontPodKlyuchPolotsk";
+const INSTAGRAM = "https://www.instagram.com/remont_polotck";
+const VK = "https://vk.com/remontstroipolotck";
 
 const services = [
   {
@@ -78,50 +84,198 @@ const priceGroups = [
     id: "demolition",
     title: "Демонтажные работы",
     rows: [
-      ["Демонтаж керамической плитки", "от 8 BYN / м²"],
-      ["Демонтаж кирпичной перегородки", "от 18 BYN / м²"],
-      ["Демонтаж цементной стяжки", "от 22 BYN / м²"],
-      ["Вывоз строительного мусора", "от 90 BYN / рейс"],
+      ["Демонтаж плитки", "10 BYN / м²"],
+      ["Демонтаж штукатурки", "7 BYN / м²"],
+      ["Демонтаж стяжки", "16 BYN / м²"],
+      ["Удаление перегородок из монолита и кирпича", "16 BYN / м²"],
+      ["Демонтаж дверного и оконного блока", "16 BYN / шт"],
+      ["Резка перегородок и стен (кирпич, бетон)", "32 BYN / м.п."],
+      ["Демонтаж обоев", "7 BYN / м²"],
+      ["Смывка побелки", "10 BYN / м²"],
+      ["Очистка от масляной краски или иного покрытия", "13 BYN / м²"],
+      ["Демонтаж дверей", "32 BYN / шт"],
+      ["Демонтаж линолеума и ковролина", "10 BYN / м²"],
+      ["Демонтаж деревянных полов", "13-16 BYN / м²"],
+      ["Демонтаж окон", "32-48 BYN / шт"],
+      ["Демонтаж унитаза, умывальника и т.д.", "32 BYN / шт"],
+      ["Демонтаж полотенцесушителя", "32-48 BYN / шт"],
+      ["Демонтаж ванны чугунной", "160 BYN / шт"],
     ],
   },
   {
     id: "electric",
     title: "Электромонтаж",
     rows: [
-      ["Монтаж подрозетника с высверливанием", "от 12 BYN / шт"],
-      ["Штробление стен под кабель", "от 9 BYN / м.п."],
-      ["Прокладка кабеля в гофре", "от 4 BYN / м.п."],
-      ["Сборка и подключение щита", "от 250 BYN"],
+      ["Штроба под проводку, кирпич бетон", "16-23 BYN / м.п."],
+      ["Штроба под проводку силикат.", "13-19 BYN / м.п."],
+      ["Укладка кабеля", "10 BYN / м.п."],
+      ["Заделка штроб", "7 BYN / м.п."],
+      ["Отверстие для электро точки кирпич бетон", "32 BYN / шт"],
+      ["Отверстие для электро точки силикат", "26 BYN / шт"],
+      ["Отверстие для электро точки ГКЛ", "23 BYN / шт"],
+      ["Монтаж подрозетника", "13 BYN / шт"],
+      ["Монтаж розетки, выкл. и т.д.", "23 BYN / шт"],
+      ["Монтаж распред коробок", "29 BYN / шт"],
+      ["Коммутация провода", "3 BYN / шт"],
+      ["Укладка гофры и короба под провод", "3 BYN / м.п."],
+      ["Монтаж точечного светильника", "13 BYN / шт"],
+      ["Навес люстр и бра", "80 BYN / шт"],
+      ["Монтаж светодиодной ленты", "16 BYN / м.п."],
+      ["Монтаж вентилятора", "32 BYN / шт"],
+      ["Монтаж электро теплого пола", "26 BYN / м²"],
+      ["Монтаж регулятора теплого пола", "29 BYN / шт"],
+      ["Монтаж автомата, УЗО, ДИФ и т.д.", "29-38 BYN / шт"],
+      ["Монтаж электро шкафа", "256-384 BYN / комплекс"],
     ],
   },
   {
     id: "plumbing",
     title: "Сантехника",
     rows: [
-      ["Разводка водоснабжения (точка)", "от 130 BYN"],
-      ["Установка унитаза / инсталляции", "от 150 BYN"],
-      ["Монтаж душевой кабины", "от 220 BYN"],
-      ["Тёплый пол водяной", "от 30 BYN / м²"],
+      ["Штроба в кирпиче и бетоне", "32 BYN / м.п."],
+      ["Штроба в силикате", "16 BYN / м.п."],
+      ["Точка водопровода канализация гор. вода+холодная", "112 BYN / шт"],
+      ["Монтаж счетчиков воды", "112 BYN / шт"],
+      ["Монтаж полотенцесушителя", "160 BYN / шт"],
+      ["Нарезка резьбы на чугунную трубу", "80 BYN / шт"],
+      ["Монтаж и подключение коллектора (гребенки)", "128 BYN / шт"],
+      ["Монтаж полотенцесушителя с переносом", "288 BYN / шт"],
+      ["Перенос коммуникации, воды канализации", "64-112 BYN / шт"],
+      ["Монтаж радиаторов отопления, снятие и установка", "64 BYN / шт"],
+      ["Монтаж радиаторов отопления, замена перенос", "192 BYN / шт"],
+      ["Монтаж теплых водяных полов", "112 BYN / м²"],
+      ["Установка отопительного котла", "480 BYN / шт"],
+      ["Обвязка котла", "480 BYN / комплекс"],
+      ["Монтаж чугунной ванны", "224 BYN / шт"],
+      ["Монтаж акриловой ванны", "192 BYN / шт"],
+      ["Установка смесителя", "80 BYN / шт"],
+      ["Установка сифона", "48 BYN / шт"],
+      ["Монтаж душевой кабины + сборка", "544 BYN / шт"],
+      ["Монтаж унитаза сборка установка", "112 BYN / шт"],
+      ["Монтаж умывальника", "48-64 BYN / шт"],
+      ["Монтаж мебели сан. узлы, тумбачки+шкафы", "96-128 BYN / шт"],
+      ["Установка + подключение стиральных машин", "64 BYN / шт"],
+      ["Установка посудомоечных машин", "80 BYN / шт"],
+      ["Монтаж душевой стойки", "48-80 BYN / шт"],
+      ["Монтаж инсталляции", "192 BYN / шт"],
+      ["Монтаж биде", "96 BYN / шт"],
     ],
   },
   {
     id: "finish",
-    title: "Отделка",
+    title: "Отделочные работы любой сложности",
     rows: [
-      ["Штукатурка стен по маякам", "от 22 BYN / м²"],
-      ["Шпатлёвка под покраску", "от 16 BYN / м²"],
-      ["Укладка плитки", "от 38 BYN / м²"],
-      ["Поклейка обоев", "от 10 BYN / м²"],
+      ["Перегородки из газосиликатных блоков", "38-48 BYN / м²"],
+      ["Перегородки из кирпича", "48 BYN / м²"],
+      ["Перегородки из гипсокартона - зашивка 2-ух сторон", "32 BYN / м²"],
+      ["Штукатурка стен 90°", "38 BYN / м²"],
+      ["Штукатурка стен", "32 BYN / м²"],
+      ["Армирование штукатурки металлосеткой", "16 BYN / м²"],
+      ["Штукатурка откосов", "29 BYN / м²"],
+      ["Армирование штукатурной сеткой", "10 BYN / м²"],
+      ["Грунтовка стен", "1,6 BYN / м²"],
+      ["Шпатлевка стен 1-слой", "5 BYN / м²"],
+      ["Шпаклевка стен финишная", "7 BYN / м²"],
+      ["Поклейка стеклохолста на стены", "7 BYN / м²"],
+      ["Малярка стен под покраску + стеклохолст", "38 BYN / м²"],
+      ["Установка перфорированного уголка стены", "10 BYN / м.п."],
+      ["Выравнивание граней стены", "13 BYN / м.п."],
+      ["Покраска", "13 BYN / м²"],
+      ["Оклейка обоями стен", "13 BYN / м²"],
+      ["Декоративное покрытие стен", "29-64 BYN / м²"],
+      ["Утепление", "48-54 BYN / м²"],
+      ["Стяжка пола по маякам", "29 BYN / м²"],
+      ["Стяжка пола нивелир", "13 BYN / м²"],
+      ["Установка и демонтаж маяка", "7 BYN / м.п."],
+      ["Гидроизоляция", "38 BYN / м²"],
+      ["Грунтовка пола", "7 BYN / м²"],
+      ["Укладка фанеры", "38 BYN / м²"],
+      ["Укладка ламината", "13 BYN / м²"],
+      ["Укладка ламината по диагонали", "19 BYN / м²"],
+      ["Настил линолеума и ковролина", "26 BYN / м²"],
+      ["Укладка инженерной доски", "48 BYN / м²"],
+      ["Укладка полов доска массив. и паркета", "83-112 BYN / м²"],
+      ["Укладка паркета ёлочка", "54 BYN / м²"],
+      ["Укладка лиственницы", "54 BYN / м²"],
+      ["Монтаж деревянных полов + шлифовка + лак", "64 BYN / м²"],
+      ["Монтаж полового плинтуса мдф", "10 BYN / м.п."],
+      ["Монтаж деревянной лестницы", "112 BYN / м.п."],
+      ["Монтаж полового плинтуса", "10-23 BYN / м.п."],
+      ["Утепление полов", "16-26 BYN / м²"],
+      ["Армирование полов", "13 BYN / м²"],
+      ["Облицовка плиткой потолка", "128-160 BYN / м²"],
+      ["Облицовка декоративным камнем стен", "80-96 BYN / м²"],
+      ["Облицовка глиняной плиткой полов+стен", "45 BYN / м²"],
+      ["Укладка плитки", "38 BYN / м²"],
+      ["Укладка керамической плитки", "45 BYN / м²"],
+      ["Укладка клинкерной плитки", "45 BYN / м²"],
+      ["Укладка плитки кабанчик", "51 BYN / м²"],
+      ["Укладка керамогранита", "45 BYN / м²"],
+      ["Укладка широкоформатной плитки", "96 BYN / м²"],
+      ["Облицовка сигар, бордюра, фреза", "13 BYN / м.п."],
+      ["Укладка керамогранита по диагонали", "51 BYN / м²"],
+      ["Монтаж плиточного уголка", "10 BYN / м.п."],
+      ["Монтаж пластикового люка", "16-32 BYN / шт"],
+      ["Монтаж скрытого люка", "112 BYN / шт"],
+      ["Монтаж экрана под ванную", "96-128 BYN / шт"],
+      ["Укладка ступений", "48 BYN / м.п."],
+      ["Укладка сапожка", "26 BYN / м.п."],
+      ["Монтаж гидроизоляционной ленты", "5 BYN / м.п."],
+      ["Монтаж демферной ленты", "7 BYN / м.п."],
+      ["Укладка камня искусственного", "42 BYN / м²"],
+      ["Укладка натурального камня", "51 BYN / м²"],
+      ["Облицовка плиткой к.гранит сложной расклад. полов и стен", "58 BYN / м²"],
+      ["Облицовка плиткой малого формата полов и стен", "80-96 BYN / м²"],
+      ["Облицовка мозаикой", "90-112 BYN / м²"],
+      ["Облицовка мозаикой сложной геометрии", "128 BYN / м²"],
+      ["Подрезка черновая", "8 BYN / м.п."],
+      ["Подрезка чистовая", "16 BYN / м.п."],
+      ["Укладка декора и фризов", "13-16 BYN / м²"],
+      ["Зарезка стыков плитки под 45° гр", "35 BYN / м.п."],
+      ["Отверстие в плитке глиняной", "16 BYN / шт"],
+      ["Отверстие в плитке граните", "19 BYN / шт"],
+      ["Фуга цементная", "3 BYN / м²"],
+      ["Фуга эпоксидная", "26 BYN / м²"],
+      ["Потолок из гипсокартона сплошной", "32 BYN / м²"],
+      ["Потолок из гипсокартона многоуровневый", "54-64 BYN / м²"],
+      ["Потолок из гипсокартона сложной геометрии", "80 BYN / м²"],
+      ["Потолок из ПВХ или иного материала", "29 BYN / м²"],
+      ["Штукатурка потолка", "29 BYN / м²"],
+      ["Армирование сеткой потолка", "16 BYN / м²"],
+      ["Грунтовка потолка", "3 BYN / м²"],
+      ["Шпатлевка потолка (1-слой)", "5 BYN / м²"],
+      ["Шлифовка шпатлевки потолка", "10 BYN / м²"],
+      ["Малярка стен под компрессорную окраску", "58 BYN / м²"],
+      ["Нанесение декоративной штукатурки типа (мокрый шёлк)", "58 BYN / м²"],
+      ["Нанесение декоративной штукатурки типа (Травертин)", "64 BYN / м²"],
+      ["Нанесение фактурных декоративных штукатурок", "48 BYN / м²"],
+      ["Поклейка стеклохолста на потолок", "7 BYN / м²"],
+      ["Установка перфорированного уголка потолок", "10 BYN / м.п."],
+      ["Выравнивание граней потолка", "13 BYN / м.п."],
+      ["Покраска потолка", "13 BYN / м²"],
+      ["Монтаж потолочного плинтуса", "23 BYN / м.п."],
+      ["Оклейка обоями потолка", "29 BYN / м²"],
+      ["Декоративное покрытие потолка", "80 BYN / м²"],
+      ["Утепление пенополексом", "26 BYN / м²"],
     ],
   },
   {
     id: "turnkey",
     title: "Комплексный ремонт и строительство",
     rows: [
-      ["Косметический ремонт квартиры", "от 180 BYN / м²"],
-      ["Капитальный ремонт под ключ", "от 420 BYN / м²"],
-      ["Ремонт санузла под ключ", "от 2 600 BYN"],
-      ["Строительство гаража / дома", "расчёт по проекту"],
+      ["Дизайн проект - 3D визуализация", "64-96 BYN / м²"],
+      ["Ремонт квартир (стандарт)", "480 BYN / м²"],
+      ["Ремонт квартир (премиум)", "640 BYN / м²"],
+      ["Ремонт квартир (люкс)", "960 BYN / м²"],
+      ["Ремонт домов", "960 BYN / м²"],
+      ["Строительство домов под ключ", "1 760 BYN / м²"],
+      ["Монолитные работы", "384 BYN / м³"],
+      ["Архитектурные перепланировки", "160 BYN / м²"],
+      ["Ведение проектов и решение некачественных монтажей", "48-64 BYN / м²"],
+      ["Реконструкция зданий", "896-1024 BYN / м²"],
+      ["Ландшафтные работы", "96-208 BYN / м²"],
+      ["Геодезические работы", "480 BYN / комплекс"],
+      ["Работы на высоте - (промышленный альпинизм)", "224 BYN / комплекс"],
     ],
   },
 ];
@@ -172,7 +326,7 @@ export default function HomePage() {
 
   const visible = portfolio.filter((p) => filter === "Все" || p.cat === filter);
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (name.trim().length < 2) {
       toast.error("Укажите имя", { description: "Минимум 2 символа." });
@@ -182,12 +336,32 @@ export default function HomePage() {
       toast.error("Проверьте номер телефона", { description: "Формат +375 XX XXX XX XX." });
       return;
     }
-    toast.success("Заявка отправлена", {
-      description: "Свяжемся с вами в течение рабочего дня и согласуем бесплатный замер.",
-    });
-    setName("");
-    setPhone("");
-    setMessage("");
+
+    try {
+      const response = await fetch("/api/send-telegram", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, phone, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send");
+      }
+
+      toast.success("Заявка отправлена", {
+        description: "Свяжемся с вами в течение рабочего дня и согласуем бесплатный замер.",
+      });
+      setName("");
+      setPhone("");
+      setMessage("");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Ошибка отправки", {
+        description: "Попробуйте позже или позвоните нам напрямую.",
+      });
+    }
   };
 
   return (
@@ -210,12 +384,20 @@ export default function HomePage() {
             </span>
           </a>
           <div className="flex shrink-0 items-center gap-2">
-            <a
-              href={`tel:${PHONE_RAW}`}
-              className="motion-link hidden text-sm font-semibold tracking-tight hover:text-accent lg:block"
-            >
-              {PHONE}
-            </a>
+            <div className="hidden flex-col gap-1 lg:flex">
+              <a
+                href={`tel:${PHONE_MTS_RAW}`}
+                className="motion-link text-sm font-semibold tracking-tight hover:text-accent"
+              >
+                {PHONE_MTS}
+              </a>
+              <a
+                href={`tel:${PHONE_A1_RAW}`}
+                className="motion-link text-xs text-muted-foreground hover:text-accent"
+              >
+                {PHONE_A1}
+              </a>
+            </div>
             <Button asChild size="sm" className="pressable bronze-sweep bg-ink text-chalk hover:bg-ink-soft">
               <a href="#form">
                 <Ruler className="h-4 w-4" />
@@ -244,11 +426,11 @@ export default function HomePage() {
           <Reveal>
             <p className="eyebrow text-bronze-soft">Строительство и ремонт с 2015 года</p>
             <h1 className="mt-5 max-w-3xl text-[1.5rem] leading-[1.15] font-semibold hyphens-auto text-balance sm:text-5xl sm:leading-[1.08] md:text-6xl">
-              Профессиональный ремонт и строительство под ключ в Полоцке и Новополоцке
+              Ремонт без головной боли — под ключ в Полоцке и Новополоцке
             </h1>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-chalk/75 sm:text-base">
-              Работаем по официальному договору с фиксированной сметой. Сроки, объёмы и стоимость
-              закреплены на бумаге, качество — на уровне премиальных объектов.
+              Работаем по официальному договору с фиксированной сметой. Помощь в выборе и доставке материала.
+              Выезд на замер и консультацию — бесплатно.
             </p>
           </Reveal>
 
@@ -307,7 +489,7 @@ export default function HomePage() {
         <div className="mt-10 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 60}>
-              <article className="motion-card group h-full bg-card p-6 hover:bg-ink hover:text-chalk sm:p-8">
+              <a href="#form" className="motion-card group block h-full bg-card p-6 hover:bg-ink hover:text-chalk sm:p-8">
                 <s.icon className="h-7 w-7 text-accent transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110" />
                 <h3 className="mt-6 text-lg font-semibold">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-chalk/70">
@@ -316,7 +498,7 @@ export default function HomePage() {
                 <span className="mt-6 inline-flex items-center gap-2 text-xs tracking-widest text-accent uppercase">
                   Обсудить <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 ease-out group-hover:translate-x-2" />
                 </span>
-              </article>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -332,7 +514,7 @@ export default function HomePage() {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <Accordion type="single" collapsible className="mt-8" defaultValue="demolition">
+            <Accordion type="single" collapsible className="mt-8">
               {priceGroups.map((g) => (
                 <AccordionItem key={g.id} value={g.id} className="border-chalk/15">
                   <AccordionTrigger className="group py-5 text-left font-display text-base font-medium transition-all duration-500 hover:pl-2 hover:text-bronze-soft hover:no-underline active:scale-[0.99]">
@@ -384,6 +566,14 @@ export default function HomePage() {
               <div className="flex justify-between gap-4">
                 <dt className="text-muted-foreground">УНП</dt>
                 <dd className="text-right font-semibold">391257515</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted-foreground">Регистрация</dt>
+                <dd className="text-right font-semibold">17.11.2020</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted-foreground">Опыт работы</dt>
+                <dd className="text-right font-semibold">С 2015 года</dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-muted-foreground">База</dt>
@@ -531,11 +721,23 @@ export default function HomePage() {
             <div>
               <p className="eyebrow text-bronze-soft">Контакты</p>
               <a
-                href={`tel:${PHONE_RAW}`}
+                href={`tel:${PHONE_MTS_RAW}`}
                 className="motion-link mt-4 block w-fit font-display text-2xl font-semibold hover:text-bronze-soft"
               >
-                {PHONE}
+                {PHONE_MTS}
               </a>
+              <a
+                href={`tel:${PHONE_A1_RAW}`}
+                className="motion-link mt-2 block w-fit font-display text-xl font-medium text-chalk/80 hover:text-bronze-soft"
+              >
+                {PHONE_A1}
+              </a>
+              <p className="mt-3 text-sm text-chalk/60">
+                МТС (основной) — Viber, WhatsApp, Telegram
+              </p>
+              <p className="mt-1 text-sm text-chalk/60">
+                А1 (второй)
+              </p>
               <p className="mt-3 text-sm text-chalk/60">
                 Полоцк, Новополоцк. Выезд по всей Беларуси и России.
               </p>
@@ -554,8 +756,18 @@ export default function HomePage() {
                   </a>
                 </li>
                 <li>
-                  <a href={`tel:${PHONE_RAW}`} className="motion-link hover:text-bronze-soft">
-                    Позвонить
+                  <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
+                    Telegram
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${PHONE_MTS_RAW}`} className="motion-link hover:text-bronze-soft">
+                    Позвонить (МТС)
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${PHONE_A1_RAW}`} className="motion-link hover:text-bronze-soft">
+                    Позвонить (А1)
                   </a>
                 </li>
               </ul>
@@ -564,22 +776,22 @@ export default function HomePage() {
               <p className="eyebrow text-bronze-soft">Соцсети</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
                     <Image src="/images/instagram.svg" alt="Instagram" width={16} height={16} className="h-4 w-4" /> Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
                     <Send className="h-4 w-4" /> Telegram — ремонт
                   </a>
                 </li>
                 <li>
-                  <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a href={TELEGRAM_BUILD} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
                     <Send className="h-4 w-4" /> Telegram — строительство
                   </a>
                 </li>
                 <li>
-                  <a href="https://vk.com" target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
+                  <a href={VK} target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
                     ВКонтакте
                   </a>
                 </li>
@@ -591,9 +803,9 @@ export default function HomePage() {
 
           <div className="space-y-1 text-xs text-chalk/55">
             <p>ИП Воробьев Илья Александрович</p>
-            <p>УНП 391257515</p>
+            <p>УНП 391257515 · Зарегистрирован 17.11.2020</p>
             <p>Республика Беларусь, Витебская область, г. Полоцк</p>
-            <p>Телефон: {PHONE} · Работаем по договору подряда</p>
+            <p>Телефон: {PHONE_MTS} (МТС), {PHONE_A1} (А1) · Работаем по договору подряда</p>
             <p className="pt-3">© {new Date().getFullYear()} ИП Воробьев И.А. Все права защищены.</p>
           </div>
         </div>
@@ -601,7 +813,7 @@ export default function HomePage() {
 
       {/* MOBILE QUICK BAR */}
       <nav className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 border-t border-chalk/10 bg-ink text-chalk md:hidden">
-        <a href={`tel:${PHONE_RAW}`} className="pressable flex flex-col items-center gap-1 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
+        <a href={`tel:${PHONE_MTS_RAW}`} className="pressable flex flex-col items-center gap-1 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
           <Phone className="h-5 w-5 text-bronze" />
           Позвонить
         </a>

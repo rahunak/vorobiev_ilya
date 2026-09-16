@@ -26,13 +26,27 @@ export function BeforeAfter({
       ref={ref}
       className="group relative aspect-4/3 w-full cursor-ew-resize touch-none overflow-hidden select-none"
       onPointerDown={(e) => {
+        e.preventDefault();
         dragging.current = true;
         e.currentTarget.setPointerCapture(e.pointerId);
         move(e.clientX);
       }}
-      onPointerMove={(e) => dragging.current && move(e.clientX)}
-      onPointerUp={() => (dragging.current = false)}
-      onPointerCancel={() => (dragging.current = false)}
+      onPointerMove={(e) => {
+        if (dragging.current) {
+          e.preventDefault();
+          move(e.clientX);
+        }
+      }}
+      onPointerUp={(e) => {
+        dragging.current = false;
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }}
+      onPointerCancel={(e) => {
+        dragging.current = false;
+        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+          e.currentTarget.releasePointerCapture(e.pointerId);
+        }
+      }}
     >
       <img
         src={after}

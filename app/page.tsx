@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   MessageCircle,
@@ -18,12 +19,11 @@ import {
   Send,
   MapPin,
   ArrowRight,
+  Trees,
+  Fence,
 } from "lucide-react";
-import { toast } from "sonner";
 
 import { Button } from "@/src/components/ui/button";
-import { Input } from "@/src/components/ui/input";
-import { Textarea } from "@/src/components/ui/textarea";
 import {
   Accordion,
   AccordionContent,
@@ -35,47 +35,74 @@ import { BeforeAfter } from "@/src/components/site/BeforeAfter";
 import { cn } from "@/src/lib/utils";
 
 
-const PHONE_MTS = "+375 29 723-75-25";
-const PHONE_MTS_RAW = "+375297237525";
-const PHONE_A1 = "+375 29 109-48-20";
-const PHONE_A1_RAW = "+375291094820";
-const WA = "https://wa.me/375297237525";
-const VIBER = "viber://chat?number=%2B375297237525";
-const TELEGRAM = "https://t.me/remontpodkluch_polotck";
-const TELEGRAM_BUILD = "https://t.me/RemontPodKlyuchPolotsk";
-const INSTAGRAM = "https://www.instagram.com/remont_polotck";
-const VK = "https://vk.com/remontstroipolotck";
+import {
+  PHONE_MTS,
+  PHONE_MTS_RAW,
+  PHONE_A1,
+  PHONE_A1_RAW,
+  WA,
+  VIBER,
+  TELEGRAM,
+  TELEGRAM_BUILD,
+  INSTAGRAM,
+  VK,
+} from "@/src/lib/contact";
+import { ContactForm } from "@/src/components/site/ContactForm";
 
 const services = [
   {
     icon: Hammer,
     title: "Ремонт под ключ",
     text: "Полный цикл: от дизайн-решения и черновых работ до финальной уборки и передачи объекта.",
+    href: "/remont-pod-klyuch",
   },
   {
-    icon: Trash2,
-    title: "Демонтажные работы",
-    text: "Аккуратный демонтаж перегородок, стяжки, плитки и старой отделки с вывозом мусора.",
+    icon: Droplets,
+    title: "Ремонт ванной и санузла",
+    text: "Гидроизоляция, плитка, сантехника и электрика. Санузел под ключ за 3–4 недели.",
+    href: "/remont-vannoj",
   },
   {
     icon: Zap,
     title: "Электромонтаж",
-    text: "Проектирование, штробление, замена проводки, щиты и слаботочные сети по нормам.",
+    text: "Замена проводки, щиты с УЗО, розетки и свет. По нормам, с фотоотчётом трасс.",
+    href: "/elektrika",
   },
   {
     icon: Droplets,
     title: "Сантехнические работы",
-    text: "Разводка труб, перенос стояков, установка сантехники, тёплые полы и водоснабжение.",
+    text: "Замена труб и стояков, сантехника, тёплые полы, котлы. Точка под ключ — 112 BYN.",
+    href: "/santehnika",
   },
   {
     icon: PaintRoller,
     title: "Отделка любой сложности",
-    text: "Штукатурка под правило, декоративные покрытия, плитка крупного формата, лепнина.",
+    text: "Штукатурка по маякам, обои, плитка, стяжка, потолки, декоративные покрытия.",
+    href: "/otdelka",
+  },
+  {
+    icon: Trees,
+    title: "Срубы ручной рубки",
+    text: "Бани и дома в русскую и канадскую чашу. Зимнее бревно, сруб бани — от 7 000 BYN.",
+    href: "/sruby",
+  },
+  {
+    icon: Fence,
+    title: "Заборы под ключ",
+    text: "Профлист, металлопрофиль, 3D-секции, ворота и калитки. Цена за метр — в договоре.",
+    href: "/zabory",
   },
   {
     icon: Home,
     title: "Строительство домов и гаражей",
     text: "Фундамент, коробка, кровля, фасад. Дома, гаражи, пристройки и хозпостройки.",
+    href: "/stroitelstvo",
+  },
+  {
+    icon: Trash2,
+    title: "Демонтажные работы",
+    text: "Аккуратный демонтаж перегородок, стяжки, плитки и старой отделки с вывозом мусора.",
+    href: "/demontazh",
   },
 ];
 
@@ -285,6 +312,7 @@ const portfolio = [
     cat: "Квартиры",
     title: "Двухкомнатная квартира, Новополоцк",
     meta: "62 м² · капитальный ремонт · 11 недель",
+    alt: "Ремонт двухкомнатной квартиры под ключ в Новополоцке",
     before: "/images/flat-before.jpg",
     after: "/images/flat-after.jpg",
   },
@@ -292,6 +320,7 @@ const portfolio = [
     cat: "Санузлы",
     title: "Санузел под ключ, Полоцк",
     meta: "6 м² · перепланировка · 4 недели",
+    alt: "Ремонт санузла под ключ в Полоцке — плитка, сантехника, электрика",
     before: "/images/bath-before.jpg",
     after: "/images/bath-after.jpg",
   },
@@ -299,6 +328,7 @@ const portfolio = [
     cat: "Строительство",
     title: "Дом с гаражом, Полоцкий район",
     meta: "168 м² · коробка, кровля, фасад",
+    alt: "Строительство дома с гаражом в Полоцком районе — коробка, кровля, фасад",
     before: "/images/house-before.jpg",
     after: "/images/house-after.jpg",
   },
@@ -306,63 +336,66 @@ const portfolio = [
 
 const categories = ["Все", "Квартиры", "Санузлы", "Строительство"] as const;
 
-function formatPhone(value: string) {
-  const digits = value.replace(/\D/g, "").slice(0, 12);
-  if (!digits) return "";
-  const cc = digits.startsWith("375") ? "375" : digits.startsWith("7") ? "7" : "";
-  if (!cc) return `+${digits}`;
-  const rest = digits.slice(cc.length);
-  const parts = [rest.slice(0, 2), rest.slice(2, 5), rest.slice(5, 7), rest.slice(7, 9)].filter(
-    Boolean,
-  );
-  return `+${cc}${parts.length ? " " + parts.join(" ") : ""}`;
-}
+// FAQ Schema для блока цен — см. docs/SEO_RECOMMENDATIONS.md, п. 9
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Сколько стоит демонтаж плитки?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Демонтаж плитки стоит 10 BYN за м². Также выполняем демонтаж штукатурки (7 BYN/м²), стяжки (16 BYN/м²), перегородок из кирпича и монолита (16 BYN/м²) и другие работы.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Какая стоимость электромонтажных работ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Штробление под проводку — от 13 BYN/м.п., монтаж розеток и выключателей — 23 BYN/шт, монтаж электрощита — от 256 BYN. Полный прайс доступен на сайте.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Сколько стоит ремонт квартиры под ключ в Полоцке?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Капитальный ремонт квартиры под ключ — от 480 BYN за м² (стандарт), премиум — 640 BYN/м², люкс — 960 BYN/м². Точная смета фиксируется в договоре после бесплатного замера.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Сколько стоит укладка плитки?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Укладка керамической плитки и керамогранита — 45 BYN за м², плитки кабанчик — 51 BYN/м², широкоформатной плитки — 96 BYN/м², мозаики — от 90 BYN/м².",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Сколько стоят сантехнические работы?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Точка водопровода и канализации — 112 BYN/шт, установка смесителя — 80 BYN, монтаж акриловой ванны — 192 BYN, унитаза — 112 BYN, душевой кабины — 544 BYN.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Как фиксируется цена ремонта?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "После бесплатного замера составляется смета, которая фиксируется в официальном договоре и не меняется в процессе работ. Оплата поэтапная — за принятый вами этап. Гарантия на работы — 24 месяца.",
+      },
+    },
+  ],
+};
 
 export default function HomePage() {
   const [filter, setFilter] = useState<(typeof categories)[number]>("Все");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
 
   const visible = portfolio.filter((p) => filter === "Все" || p.cat === filter);
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (name.trim().length < 2) {
-      toast.error("Укажите имя", { description: "Минимум 2 символа." });
-      return;
-    }
-    if (phone.replace(/\D/g, "").length < 11) {
-      toast.error("Проверьте номер телефона", { description: "Формат +375 XX XXX XX XX." });
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/send-telegram", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, phone, message }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send");
-      }
-
-      toast.success("Заявка отправлена", {
-        description: "Свяжемся с вами в течение рабочего дня и согласуем бесплатный замер.",
-      });
-      setName("");
-      setPhone("");
-      setMessage("");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Ошибка отправки", {
-        description: "Попробуйте позже или позвоните нам напрямую.",
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background pb-20 md:pb-0">
@@ -387,12 +420,14 @@ export default function HomePage() {
             <div className="hidden flex-col gap-1 lg:flex">
               <a
                 href={`tel:${PHONE_MTS_RAW}`}
+                title={`Позвонить на МТС: ${PHONE_MTS}`}
                 className="motion-link text-sm font-semibold tracking-tight hover:text-accent"
               >
                 {PHONE_MTS}
               </a>
               <a
                 href={`tel:${PHONE_A1_RAW}`}
+                title={`Позвонить на А1: ${PHONE_A1}`}
                 className="motion-link text-xs text-muted-foreground hover:text-accent"
               >
                 {PHONE_A1}
@@ -416,7 +451,7 @@ export default function HomePage() {
       <section id="top" className="relative overflow-hidden bg-ink text-chalk">
         <Image
           src="/images/hero.jpg"
-          alt="Интерьер после премиального ремонта под ключ"
+          alt="Ремонт квартир под ключ в Полоцке — интерьер после ремонта"
           fill
           priority
           className="image-depth object-cover opacity-45"
@@ -426,7 +461,7 @@ export default function HomePage() {
           <Reveal>
             <p className="eyebrow text-bronze-soft">Строительство и ремонт с 2015 года</p>
             <h1 className="mt-5 max-w-3xl text-[1.5rem] leading-[1.15] font-semibold hyphens-auto text-balance sm:text-5xl sm:leading-[1.08] md:text-6xl">
-              Ремонт без головной боли — под ключ в Полоцке и Новополоцке
+              Ремонт квартир и строительство домов под ключ в Полоцке и Новополоцке — гарантия 24 месяца
             </h1>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-chalk/75 sm:text-base">
               Работаем по официальному договору с фиксированной сметой. Помощь в выборе и доставке материала.
@@ -483,29 +518,49 @@ export default function HomePage() {
         <Reveal>
           <p className="eyebrow text-accent">Услуги</p>
           <h2 className="mt-3 max-w-2xl text-2xl leading-tight font-semibold text-balance sm:text-4xl">
-            Полный цикл работ одной бригадой
+            Услуги ремонта и строительства в Полоцке и Новополоцке
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 60}>
-              <a href="#form" className="motion-card group block h-full bg-card p-6 hover:bg-ink hover:text-chalk sm:p-8">
+          {services.map((s, i) => {
+            const CardInner = (
+              <>
                 <s.icon className="h-7 w-7 text-accent transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110" />
                 <h3 className="mt-6 text-lg font-semibold">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-chalk/70">
                   {s.text}
                 </p>
                 <span className="mt-6 inline-flex items-center gap-2 text-xs tracking-widest text-accent uppercase">
-                  Обсудить <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 ease-out group-hover:translate-x-2" />
+                  {s.href ? "Подробнее" : "Обсудить"}{" "}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 ease-out group-hover:translate-x-2" />
                 </span>
-              </a>
-            </Reveal>
-          ))}
+              </>
+            );
+            const cardCls =
+              "motion-card group block h-full bg-card p-6 hover:bg-ink hover:text-chalk sm:p-8";
+            return (
+              <Reveal key={s.title} delay={i * 60}>
+                {s.href ? (
+                  <Link href={s.href} className={cardCls}>
+                    {CardInner}
+                  </Link>
+                ) : (
+                  <a href="#form" className={cardCls}>
+                    {CardInner}
+                  </a>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
       {/* PRICES */}
       <section id="prices" className="bg-ink text-chalk">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-24">
           <Reveal>
             <p className="eyebrow text-bronze-soft">Прайс-лист</p>
@@ -558,7 +613,8 @@ export default function HomePage() {
               материалов с ценами и фотоотчёт по каждому этапу. Скрытых доплат нет — любое изменение
               оформляется дополнительным соглашением.
             </p>
-            <dl className="mt-8 space-y-4 border-t border-border pt-6 text-sm">
+            <h3 className="mt-8 text-lg font-semibold">Реквизиты и гарантии</h3>
+            <dl className="mt-4 space-y-4 border-t border-border pt-6 text-sm">
               <div className="flex justify-between gap-4">
                 <dt className="text-muted-foreground">Исполнитель</dt>
                 <dd className="text-right font-semibold">ИП Воробьев Илья Александрович</dd>
@@ -586,7 +642,8 @@ export default function HomePage() {
             </dl>
           </Reveal>
           <Reveal delay={120}>
-            <ul className="grid gap-px overflow-hidden border border-border bg-border">
+            <h3 className="text-lg font-semibold">Наши преимущества</h3>
+            <ul className="mt-5 grid gap-px overflow-hidden border border-border bg-border">
               {[
                 ["Бесплатный замер", "Выезд, обмеры и смета без обязательств."],
                 ["Фиксированная смета", "Цена закреплена договором до конца работ."],
@@ -608,7 +665,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
           <Reveal>
             <p className="eyebrow text-accent">Портфолио</p>
-            <h2 className="mt-3 text-2xl leading-tight font-semibold sm:text-4xl">До и после</h2>
+            <h2 className="mt-3 text-2xl leading-tight font-semibold sm:text-4xl">Наши работы: до и после</h2>
             <p className="mt-3 text-sm text-muted-foreground">
               Потяните ползунок, чтобы увидеть результат.
             </p>
@@ -637,7 +694,7 @@ export default function HomePage() {
             {visible.map((p, i) => (
               <Reveal key={p.title} delay={i * 80}>
                 <article className="motion-card group overflow-hidden border border-border bg-card">
-                  <BeforeAfter before={p.before} after={p.after} alt={p.title} />
+                  <BeforeAfter before={p.before} after={p.after} alt={p.alt} />
                   <div className="p-5">
                     <p className="eyebrow text-accent">{p.cat}</p>
                     <h3 className="mt-2 text-base font-semibold">{p.title}</h3>
@@ -662,55 +719,7 @@ export default function HomePage() {
           </p>
         </Reveal>
         <Reveal delay={100}>
-          <form onSubmit={submit} className="mt-8 grid gap-4 border border-border bg-card p-6 transition-shadow duration-700 focus-within:border-bronze/50 focus-within:shadow-[0_18px_50px_color-mix(in_oklab,var(--ink)_10%,transparent)] sm:p-8">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="grid gap-2">
-                <label htmlFor="name" className="text-xs tracking-widest uppercase">
-                  Имя
-                </label>
-                <Input
-                  id="name"
-                  value={name}
-                  maxLength={60}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Как к вам обращаться"
-                  className="h-12 rounded-sm"
-                />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="phone" className="text-xs tracking-widest uppercase">
-                  Телефон (РБ / РФ)
-                </label>
-                <Input
-                  id="phone"
-                  inputMode="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(formatPhone(e.target.value))}
-                  placeholder="+375 29 000 00 00"
-                  className="h-12 rounded-sm"
-                />
-              </div>
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="msg" className="text-xs tracking-widest uppercase">
-                Описание задачи
-              </label>
-              <Textarea
-                id="msg"
-                value={message}
-                maxLength={1000}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Объект, площадь, сроки, что нужно сделать"
-                className="min-h-32 rounded-sm"
-              />
-            </div>
-            <Button type="submit" size="lg" className="pressable bronze-sweep group h-12 bg-ink text-chalk hover:bg-ink-soft">
-              Получить расчёт сметы <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-2" />
-            </Button>
-            <p className="text-xs text-muted-foreground">
-              Нажимая кнопку, вы соглашаетесь на обработку контактных данных для связи по заявке.
-            </p>
-          </form>
+          <ContactForm source="Главная" />
         </Reveal>
       </section>
 
@@ -722,41 +731,56 @@ export default function HomePage() {
               <p className="eyebrow text-bronze-soft">Контакты</p>
               <a
                 href={`tel:${PHONE_MTS_RAW}`}
+                title={`Позвонить на МТС: ${PHONE_MTS}`}
                 className="motion-link mt-4 block w-fit font-display text-2xl font-semibold hover:text-bronze-soft"
               >
                 {PHONE_MTS}
               </a>
               <a
                 href={`tel:${PHONE_A1_RAW}`}
+                title={`Позвонить на А1: ${PHONE_A1}`}
                 className="motion-link mt-2 block w-fit font-display text-xl font-medium text-chalk/80 hover:text-bronze-soft"
               >
                 {PHONE_A1}
               </a>
-              <p className="mt-3 text-sm text-chalk/60">
-                МТС (основной) — Viber, WhatsApp, Telegram
+              <p className="mt-1 text-sm text-chalk/60">
+                Полоцк, Новополоцк.
               </p>
               <p className="mt-1 text-sm text-chalk/60">
-                А1 (второй)
-              </p>
-              <p className="mt-3 text-sm text-chalk/60">
-                Полоцк, Новополоцк. Выезд по всей Беларуси и России.
+                Выезд по всей Беларуси и России.
               </p>
             </div>
             <div>
               <p className="eyebrow text-bronze-soft">Мессенджеры</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
-                  <a href={WA} target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
+                  <a
+                    href={WA}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Написать в WhatsApp"
+                    className="motion-link hover:text-bronze-soft"
+                  >
                     WhatsApp
                   </a>
                 </li>
                 <li>
-                  <a href={VIBER} className="motion-link hover:text-bronze-soft">
+                  <a
+                    href={VIBER}
+                    title="Написать в Viber"
+                    className="motion-link hover:text-bronze-soft"
+                  >
                     Viber
                   </a>
                 </li>
                 <li>
-                  <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
+                  <a
+                    href={TELEGRAM}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    title="Написать в Telegram"
+                    className="motion-link hover:text-bronze-soft"
+                  >
                     Telegram
                   </a>
                 </li>
@@ -776,22 +800,46 @@ export default function HomePage() {
               <p className="eyebrow text-bronze-soft">Соцсети</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
-                  <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a
+                    href={INSTAGRAM}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    title="Мы в Instagram — @remont_polotck"
+                    className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft"
+                  >
                     <Image src="/images/instagram.svg" alt="Instagram" width={16} height={16} className="h-4 w-4" /> Instagram
                   </a>
                 </li>
                 <li>
-                  <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a
+                    href={TELEGRAM}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    title="Telegram-канал про ремонт"
+                    className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft"
+                  >
                     <Send className="h-4 w-4" /> Telegram — ремонт
                   </a>
                 </li>
                 <li>
-                  <a href={TELEGRAM_BUILD} target="_blank" rel="noopener noreferrer" className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft">
+                  <a
+                    href={TELEGRAM_BUILD}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    title="Telegram-канал про строительство"
+                    className="motion-link inline-flex items-center gap-2 hover:text-bronze-soft"
+                  >
                     <Send className="h-4 w-4" /> Telegram — строительство
                   </a>
                 </li>
                 <li>
-                  <a href={VK} target="_blank" rel="noopener noreferrer" className="motion-link hover:text-bronze-soft">
+                  <a
+                    href={VK}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    title="Мы ВКонтакте"
+                    className="motion-link hover:text-bronze-soft"
+                  >
                     ВКонтакте
                   </a>
                 </li>
@@ -802,10 +850,9 @@ export default function HomePage() {
           <div className="hairline my-10" />
 
           <div className="space-y-1 text-xs text-chalk/55">
-            <p>ИП Воробьев Илья Александрович</p>
-            <p>УНП 391257515 · Зарегистрирован 17.11.2020</p>
+            <p>ИП Воробьев Илья Александрович УНП 391257515 · Зарегистрирован 17.11.2020 · Работаем по договору подряда</p>
             <p>Республика Беларусь, Витебская область, г. Полоцк</p>
-            <p>Телефон: {PHONE_MTS} (МТС), {PHONE_A1} (А1) · Работаем по договору подряда</p>
+            <p>Телефоны: {PHONE_MTS}, {PHONE_A1} </p>
             <p className="pt-3">© {new Date().getFullYear()} ИП Воробьев И.А. Все права защищены.</p>
           </div>
         </div>
@@ -813,11 +860,11 @@ export default function HomePage() {
 
       {/* MOBILE QUICK BAR */}
       <nav className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 border-t border-chalk/10 bg-ink text-chalk md:hidden">
-        <a href={`tel:${PHONE_MTS_RAW}`} className="pressable flex flex-col items-center gap-1 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
+        <a href={`tel:${PHONE_MTS_RAW}`} title={`Позвонить на МТС: ${PHONE_MTS}`} className="pressable flex flex-col items-center gap-1 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
           <Phone className="h-5 w-5 text-bronze" />
           Позвонить
         </a>
-        <a href={WA} target="_blank" rel="noopener noreferrer" className="pressable flex flex-col items-center gap-1 border-x border-chalk/10 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
+        <a href={WA} target="_blank" rel="noopener noreferrer" title="Написать в WhatsApp" className="pressable flex flex-col items-center gap-1 border-x border-chalk/10 py-2.5 text-[10px] tracking-wider uppercase active:bg-ink-soft">
           <MessageCircle className="h-5 w-5 text-bronze" />
           WhatsApp
         </a>

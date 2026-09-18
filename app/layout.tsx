@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Unbounded } from "next/font/google";
-
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/src/components/ui/sonner";
 import {
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [ogImageUrl],
-  },  robots: {
+  }, robots: {
     index: true,
     follow: true,
     googleBot: {
@@ -253,17 +253,68 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const GTM_ID = 'GTM-W5N7RXK6';
   return (
     <html lang="ru" className={`${manrope.variable} ${unbounded.variable}`}>
       <head>
+        {/* Initialize dataLayer early to capture events before GTM loads */}
+        {isProduction && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: 'window.dataLayer = window.dataLayer || [];',
+            }}
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body>
+        {/* Google Tag Manager (noscript) - loads only in production */}
+        {isProduction && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
         {children}
         <Toaster position="top-center" richColors />
+        {/* Google Tag Manager - aggressively deferred for optimal LCP */}
+        {isProduction && (
+          <Script
+            id="gtm-defer"
+            strategy="lazyOnload"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  window.dataLayer = window.dataLayer || [];
+
+                  function loadGTM() {
+                    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtm.js?id=${GTM_ID}';
+                    document.head.appendChild(script);
+                  }
+
+                  // lazyOnload already executes after page load, use requestIdleCallback for additional delay
+                  if ('requestIdleCallback' in window) {
+                    requestIdleCallback(loadGTM, { timeout: 3000 });
+                  } else {
+                    setTimeout(loadGTM, 3000);
+                  }
+                })();
+              `,
+            }}
+          />
+        )}
       </body>
     </html>
   );

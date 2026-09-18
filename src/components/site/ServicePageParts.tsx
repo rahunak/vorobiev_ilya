@@ -20,6 +20,13 @@ import {
 } from "@/src/components/ui/accordion";
 import { Reveal } from "@/src/components/site/Reveal";
 import { ContactForm } from "@/src/components/site/ContactForm";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/src/components/ui/breadcrumb";
 import { SITE_NAME, SITE_URL } from "@/src/lib/site";
 import {
   PHONE_A1,
@@ -166,7 +173,19 @@ export function ServiceHero({ d }: { d: ServicePageData }) {
       <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/80 to-ink" />
       <div className="relative mx-auto max-w-6xl px-4 pt-14 pb-16 sm:px-6 md:pt-20 md:pb-20">
         <Reveal>
-          <p className="eyebrow text-bronze-soft">{d.eyebrow}</p>
+          <Breadcrumb>
+            <BreadcrumbList className="eyebrow text-bronze-soft">
+              <BreadcrumbItem>
+                <Link href="/" className="transition-colors hover:text-chalk">
+                  Главная
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="text-chalk/40 [&>svg]:h-3 [&>svg]:w-3" />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-bronze-soft">{d.eyebrow}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           <h1 className="mt-5 max-w-3xl text-[1.4rem] leading-[1.18] font-semibold hyphens-auto text-balance sm:text-4xl sm:leading-[1.12] md:text-5xl">
             {d.h1}
           </h1>

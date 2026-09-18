@@ -9,6 +9,8 @@ import {
   SITE_TITLE,
   SITE_DESCRIPTION,
   OG_IMAGE_PATH,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
 } from "@/src/lib/site";
 
 const manrope = Manrope({
@@ -70,8 +72,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_PATH,
-        width: 1200,
-        height: 630,
+        width: OG_IMAGE_WIDTH,
+        height: OG_IMAGE_HEIGHT,
         alt: "Ремонт и строительство под ключ — ИП Воробьев И.А.",
       },
     ],

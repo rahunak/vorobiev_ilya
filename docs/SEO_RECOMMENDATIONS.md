@@ -454,7 +454,6 @@ const breadcrumbSchema = {
 
 ## Контакты
 Телефон: +375 29 723-75-25 (МТС, Viber, WhatsApp, Telegram)
-Телефон: +375 29 109-48-20 (А1)
 Telegram: @remontpodkluch_polotck
 Instagram: @remont_polotck
 Сайт: https://ваш-домен.by

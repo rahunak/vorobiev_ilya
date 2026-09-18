@@ -25,4 +25,7 @@ export const SITE_TITLE =
 export const SITE_DESCRIPTION =
   "Ремонт квартир, домов и строительство под ключ в Полоцке и Новополоцке. Договор с фиксированной сметой, гарантия 24 месяца. Бесплатный замер — звоните: +375 29 723-75-25";
 
-export const OG_IMAGE_PATH = "/images/og-image.jpg";
+/** Open Graph / Twitter превью, 2400×1260 (пропорция 1200×630). */
+export const OG_IMAGE_PATH = "/images/og_image.png";
+export const OG_IMAGE_WIDTH = 2400;
+export const OG_IMAGE_HEIGHT = 1260;

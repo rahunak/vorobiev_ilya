@@ -27,10 +27,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/src/components/ui/breadcrumb";
-import { SITE_NAME, SITE_URL } from "@/src/lib/site";
 import {
-  PHONE_A1,
-  PHONE_A1_RAW,
+  SITE_NAME,
+  SITE_URL,
+  OG_IMAGE_PATH,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+} from "@/src/lib/site";
+import {
   PHONE_MTS,
   PHONE_MTS_RAW,
   INSTAGRAM,
@@ -97,6 +101,14 @@ export function serviceMetadata(d: ServicePageData): Metadata {
       locale: "ru_RU",
       url: `${SITE_URL}/${d.slug}`,
       siteName: SITE_NAME,
+      images: [
+        {
+          url: OG_IMAGE_PATH,
+          width: OG_IMAGE_WIDTH,
+          height: OG_IMAGE_HEIGHT,
+          alt: d.heroAlt,
+        },
+      ],
     },
   };
 }
@@ -129,13 +141,6 @@ export function ServiceHeader() {
               className="motion-link text-sm font-semibold tracking-tight hover:text-accent"
             >
               {PHONE_MTS}
-            </a>
-            <a
-              href={`tel:${PHONE_A1_RAW}`}
-              title={`Позвонить на А1: ${PHONE_A1}`}
-              className="motion-link text-xs text-muted-foreground hover:text-accent"
-            >
-              {PHONE_A1}
             </a>
           </div>
           <Button
@@ -478,13 +483,6 @@ export function ServiceFooter({ d }: { d: ServicePageData }) {
               className="motion-link mt-4 block w-fit font-display text-2xl font-semibold hover:text-bronze-soft"
             >
               {PHONE_MTS}
-            </a>
-            <a
-              href={`tel:${PHONE_A1_RAW}`}
-              title={`Позвонить на А1: ${PHONE_A1}`}
-              className="motion-link mt-2 block w-fit font-display text-xl font-medium text-chalk/80 hover:text-bronze-soft"
-            >
-              {PHONE_A1}
             </a>
             <p className="mt-3 text-sm text-chalk/60">Полоцк, Новополоцк.</p>
             <p className="mt-1 text-sm text-chalk/60">

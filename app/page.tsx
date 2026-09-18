@@ -38,8 +38,6 @@ import { cn } from "@/src/lib/utils";
 import {
   PHONE_MTS,
   PHONE_MTS_RAW,
-  PHONE_A1,
-  PHONE_A1_RAW,
   WA,
   VIBER,
   TELEGRAM,
@@ -425,13 +423,6 @@ export default function HomePage() {
               >
                 {PHONE_MTS}
               </a>
-              <a
-                href={`tel:${PHONE_A1_RAW}`}
-                title={`Позвонить на А1: ${PHONE_A1}`}
-                className="motion-link text-xs text-muted-foreground hover:text-accent"
-              >
-                {PHONE_A1}
-              </a>
             </div>
             <Button asChild size="sm" className="pressable bronze-sweep bg-ink text-chalk hover:bg-ink-soft">
               <a href="#form">
@@ -736,13 +727,6 @@ export default function HomePage() {
               >
                 {PHONE_MTS}
               </a>
-              <a
-                href={`tel:${PHONE_A1_RAW}`}
-                title={`Позвонить на А1: ${PHONE_A1}`}
-                className="motion-link mt-2 block w-fit font-display text-xl font-medium text-chalk/80 hover:text-bronze-soft"
-              >
-                {PHONE_A1}
-              </a>
               <p className="mt-1 text-sm text-chalk/60">
                 Полоцк, Новополоцк.
               </p>
@@ -787,11 +771,6 @@ export default function HomePage() {
                 <li>
                   <a href={`tel:${PHONE_MTS_RAW}`} className="motion-link hover:text-bronze-soft">
                     Позвонить (МТС)
-                  </a>
-                </li>
-                <li>
-                  <a href={`tel:${PHONE_A1_RAW}`} className="motion-link hover:text-bronze-soft">
-                    Позвонить (А1)
                   </a>
                 </li>
               </ul>
@@ -852,7 +831,7 @@ export default function HomePage() {
           <div className="space-y-1 text-xs text-chalk/55">
             <p>ИП Воробьев Илья Александрович УНП 391257515 · Зарегистрирован 17.11.2020 · Работаем по договору подряда</p>
             <p>Республика Беларусь, Витебская область, г. Полоцк</p>
-            <p>Телефоны: {PHONE_MTS}, {PHONE_A1} </p>
+            <p>Телефоны: {PHONE_MTS} </p>
             <p className="pt-3">© {new Date().getFullYear()} ИП Воробьев И.А. Все права защищены.</p>
           </div>
         </div>

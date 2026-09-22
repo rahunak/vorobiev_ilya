@@ -2,10 +2,10 @@
   "mcpServers": {
     "graft": {
       "command": "npx",
-      "args": [
-        "@nanonets/graft",
-        "mcp"
-      ]
+      "args": ["@nanonets/graft", "mcp"]
+    },
+    "google-seo-mcp": {
+      "command": "/home/rahunak/.local/bin/google-seo-mcp",
     }
   }
 }

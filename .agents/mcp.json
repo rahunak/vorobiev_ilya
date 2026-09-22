@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "graft": {
+      "command": "/home/rahunak/Documents/eugene/AI_agents/проекты/vorobiev_ilya/.agents/graft-mcp.sh"
+    }
+  }
+}

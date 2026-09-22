@@ -3,7 +3,7 @@
 **Дата:** 17.09.2026  
 **Бизнес:** ИП Воробьев И.А. — ремонт и строительство под ключ, Полоцк / Новополоцк  
 **Сбор данных:** MCP-сервер `google-seo-mcp` (Google Suggest alphabet-расширение + гео-подсказки + Google Trends related, `hl=ru`, `gl/geo=BY`)
-
+Сайт: https://komfortremont.by/
 ---
 
 ## 1. Методология

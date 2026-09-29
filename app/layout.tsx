@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, Unbounded } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import YandexMetrika from "@/components/YandexMetrika";
 import { Toaster } from "@/src/components/ui/sonner";
 import {
   SITE_URL,
@@ -285,6 +286,11 @@ export default function RootLayout({
         )}
         {children}
         <Toaster position="top-center" richColors />
+
+        {/* Яндекс.Метрика — поведенческие факторы Яндекса. Отложенная загрузка
+            (первое взаимодействие / 3.5 с), не конфликтует с GTM. Номер счётчика
+            вписать в components/YandexMetrika.tsx. */}
+        {isProduction && <YandexMetrika enabled={isProduction} />}
         {/* Google Tag Manager - aggressively deferred for optimal LCP */}
         {isProduction && (
           <Script

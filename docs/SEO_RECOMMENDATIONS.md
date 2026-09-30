@@ -564,10 +564,10 @@ Instagram: @remont_polotck
 ```tsx
 // app/layout.tsx
 export const metadata: Metadata = {
-  // ... остальное
+  // Реальные ключи для  https://komfortremont.by/
   verification: {
-    google: 'ваш-google-verification-код',
-    yandex: 'ваш-yandex-verification-код',
+    google: 'N7zWtpcWipKHF4CYfC35CFamlzMIZJ9K8H8rBHiSYl8',
+    yandex: '406256a46bcaec17',
   },
 };
 ```

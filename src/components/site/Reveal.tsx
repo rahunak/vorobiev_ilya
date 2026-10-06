@@ -7,15 +7,20 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /** Рендерить видимым сразу (без ожидания IntersectionObserver).
+   *  Для контента первого экрана: иначе LCP откладывается на анимацию. */
+  immediate?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(immediate);
 
   useEffect(() => {
+    if (immediate) return;
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -29,7 +34,7 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [immediate]);
 
   return (
     <div

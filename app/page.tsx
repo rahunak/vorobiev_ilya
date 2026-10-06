@@ -50,8 +50,8 @@ import { ContactForm } from "@/src/components/site/ContactForm";
 const services = [
   {
     icon: Hammer,
-    title: "Ремонт под ключ",
-    text: "Полный цикл: от дизайн-решения и черновых работ до финальной уборки и передачи объекта.",
+    title: "Ремонт квартир под ключ",
+    text: "Капитальный ремонт квартир в Полоцке и Новополоцке: от 480 BYN/м², фиксированная смета в договоре, гарантия 24 месяца.",
     href: "/remont-pod-klyuch",
   },
   {
@@ -62,20 +62,20 @@ const services = [
   },
   {
     icon: Zap,
-    title: "Электромонтаж",
-    text: "Замена проводки, щиты с УЗО, розетки и свет. По нормам, с фотоотчётом трасс.",
+    title: "Электрик в Полоцке и Новополоцке",
+    text: "Услуги электрика: замена проводки, щиты с УЗО, розетки и свет. По нормам, с фотоотчётом трасс.",
     href: "/elektrika",
   },
   {
     icon: Droplets,
-    title: "Сантехнические работы",
-    text: "Замена труб и стояков, сантехника, тёплые полы, котлы. Точка под ключ — 112 BYN.",
+    title: "Сантехник в Полоцке и Новополоцке",
+    text: "Услуги сантехника: замена труб и стояков, сантехника, тёплые полы, котлы. Точка под ключ — 112 BYN.",
     href: "/santehnika",
   },
   {
     icon: PaintRoller,
-    title: "Отделка любой сложности",
-    text: "Штукатурка по маякам, обои, плитка, стяжка, потолки, декоративные покрытия.",
+    title: "Отделочные работы",
+    text: "Штукатурка стен по маякам, поклейка обоев, плитка, стяжка, потолки, декоративные покрытия.",
     href: "/otdelka",
   },
   {
@@ -449,18 +449,18 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/75 to-ink" />
         <div className="relative mx-auto max-w-6xl px-4 pt-14 pb-16 sm:px-6 md:pt-24 md:pb-24">
-          <Reveal>
+          <Reveal immediate>
             <p className="eyebrow text-bronze-soft">Строительство и ремонт с 2015 года</p>
             <h1 className="mt-5 max-w-3xl text-[1.5rem] leading-[1.15] font-semibold hyphens-auto text-balance sm:text-5xl sm:leading-[1.08] md:text-6xl">
               Ремонт квартир и строительство домов под ключ в Полоцке и Новополоцке — гарантия 24 месяца
             </h1>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-chalk/75 sm:text-base">
-              Работаем по официальному договору с фиксированной сметой. Помощь в выборе и доставке материала.
-              Выезд на замер и консультацию — бесплатно.
+              Услуги мастера по ремонту квартир и домов: официальный договор с фиксированной сметой,
+              помощь в выборе и доставке материалов. Выезд на замер и консультацию — бесплатно.
             </p>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} immediate>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button
                 asChild

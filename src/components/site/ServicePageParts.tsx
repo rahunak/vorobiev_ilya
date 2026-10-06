@@ -177,7 +177,7 @@ export function ServiceHero({ d }: { d: ServicePageData }) {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/80 to-ink" />
       <div className="relative mx-auto max-w-6xl px-4 pt-14 pb-16 sm:px-6 md:pt-20 md:pb-20">
-        <Reveal>
+        <Reveal immediate>
           <Breadcrumb>
             <BreadcrumbList className="eyebrow text-bronze-soft">
               <BreadcrumbItem>
@@ -198,7 +198,7 @@ export function ServiceHero({ d }: { d: ServicePageData }) {
             {d.lead}
           </p>
         </Reveal>
-        <Reveal delay={120}>
+        <Reveal delay={120} immediate>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button
               asChild

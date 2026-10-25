@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
+import { trackEvent } from "@/src/lib/analytics";
 
 function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 12);
@@ -51,6 +52,8 @@ export function ContactForm({ source }: { source?: string }) {
       toast.success("Заявка отправлена", {
         description: "Свяжемся с вами в течение рабочего дня и согласуем бесплатный замер.",
       });
+      // GA4 — успешная отправка заявки
+      trackEvent("generate_lead", { form: "contact", page_source: source || "home" });
       setName("");
       setPhone("");
       setMessage("");

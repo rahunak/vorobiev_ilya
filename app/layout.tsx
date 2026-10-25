@@ -3,6 +3,7 @@ import { Manrope, Unbounded } from "next/font/google";
 import "./globals.css";
 import YandexMetrika from "@/components/YandexMetrika";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import PhoneClickTracker from "@/src/components/site/PhoneClickTracker";
 import { Toaster } from "@/src/components/ui/sonner";
 import {
   SITE_URL,
@@ -280,6 +281,9 @@ export default function RootLayout({
         {/* GA4 — прямое подключение через gtag.js (без GTM).
             ID вписать в components/GoogleAnalytics.tsx. */}
         {isProduction && <GoogleAnalytics enabled={isProduction} />}
+
+        {/* Глобальный трекер кликов по телефонным ссылкам → GA4 tel_click */}
+        {isProduction && <PhoneClickTracker />}
       </body>
     </html>
   );

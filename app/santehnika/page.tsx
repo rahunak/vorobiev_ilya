@@ -8,6 +8,9 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "santehnika",
+  articleLinks: [
+    { href: "/stati/teplyj-pol-vodyanoj-ili-elektrichesky", label: "Тёплый пол: водяной или электрический" },
+  ],
   eyebrow: "Сантехнические работы",
   h1: "Сантехник в Полоцке и Новополоцке — вызов на дом, монтаж под ключ",
   title: "Сантехник на дом в Полоцке — замена труб, сантехники, тёплый пол",

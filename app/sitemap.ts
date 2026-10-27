@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, OG_IMAGE_PATH } from "@/src/lib/site";
+import { ARTICLES } from "@/src/data/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const services: {
@@ -32,6 +33,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: s.priority,
       images: [`${SITE_URL}${s.image}`],
+    })),
+    // Информационный для SEO: хаб + статьи блога /stati
+    {
+      url: `${SITE_URL}/stati`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+      images: [`${SITE_URL}${OG_IMAGE_PATH}`],
+    },
+    ...ARTICLES.map((a) => ({
+      url: `${SITE_URL}/stati/${a.slug}`,
+      lastModified: new Date(a.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      images: [`${SITE_URL}${a.heroImage ?? OG_IMAGE_PATH}`],
     })),
   ];
 }

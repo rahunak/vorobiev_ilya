@@ -84,6 +84,8 @@ export interface ServicePageData {
   faq: FaqItem[];
   /** Опционально: переопределить перелинковку в футере (по умолчанию — все услуги из SERVICE_LINKS). */
   crossLinks?: { href: string; label: string }[];
+  /** Опционально: колонка «Статьи по теме» в футере (перелинковка услуг ↔ блог /stati). */
+  articleLinks?: { href: string; label: string }[];
 }
 
 /* ------------------------------------------------------------------ meta */
@@ -420,9 +422,25 @@ export function ServiceFooter({ d }: { d: ServicePageData }) {
   const links = (d.crossLinks ?? ALL_SERVICE_LINKS).filter(
     (l) => !l.href.endsWith(`/${d.slug}`),
   );
+  const articleLinks = d.articleLinks ?? [];
   return (
     <footer className="bg-ink text-chalk">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        {articleLinks.length > 0 && (
+          <>
+            <p className="eyebrow text-bronze-soft">Статьи по теме</p>
+            <ul className="mt-4 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+              {articleLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="motion-link hover:text-bronze-soft">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="hairline mt-10" />
+          </>
+        )}
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <p className="eyebrow text-bronze-soft">Другие услуги</p>

@@ -8,6 +8,10 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "zabory",
+  articleLinks: [
+    { href: "/stati/zabor-iz-profnastila", label: "Забор из профнастила: схема и цена под ключ" },
+    { href: "/stati/otmostka-vokrug-doma", label: "Отмостка вокруг дома: технология и цена" },
+  ],
   eyebrow: "Заборы и ворота",
   h1: "Заборы под ключ в Полоцке и Новополоцке — профлист, металлопрофиль, ворота",
   title: "Заборы под ключ в Полоцке — цена за метр, фото работ",

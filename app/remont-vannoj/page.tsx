@@ -8,6 +8,10 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "remont-vannoj",
+  articleLinks: [
+    { href: "/stati/remont-vannoj-v-hrushchevke", label: "Ремонт ванной в хрущевке: варианты и цена" },
+    { href: "/stati/teplyj-pol-vodyanoj-ili-elektrichesky", label: "Тёплый пол: водяной или электрический" },
+  ],
   eyebrow: "Ремонт ванной и санузла",
   h1: "Ремонт ванной комнаты и санузла под ключ в Полоцке и Новополоцке",
   title: "Ремонт ванной комнаты под ключ в Полоцке — цена, фото работ",

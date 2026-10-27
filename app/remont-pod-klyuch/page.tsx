@@ -8,6 +8,11 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "remont-pod-klyuch",
+  articleLinks: [
+    { href: "/stati/shtukaturka-sten-po-mayakam", label: "Штукатурка стен по маякам: технология и цена" },
+    { href: "/stati/poklejka-oboev", label: "Поклейка обоев: технология и этапы работ" },
+    { href: "/stati/remont-vannoj-v-hrushchevke", label: "Ремонт ванной в хрущевке: варианты и цена" },
+  ],
   eyebrow: "Ремонт квартир",
   h1: "Ремонт квартир под ключ в Полоцке и Новополоцке",
   title: "Ремонт квартир под ключ в Полоцке и Новополоцке",

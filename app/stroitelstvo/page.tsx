@@ -8,6 +8,9 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "stroitelstvo",
+  articleLinks: [
+    { href: "/stati/otmostka-vokrug-doma", label: "Отмостка вокруг дома: технология и цена" },
+  ],
   eyebrow: "Строительство домов и гаражей",
   h1: "Строительство домов и гаражей под ключ в Полоцке и Новополоцке",
   title: "Строительство домов под ключ в Полоцке — от 1760 BYN/м², договор",

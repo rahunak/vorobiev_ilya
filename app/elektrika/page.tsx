@@ -8,6 +8,9 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "elektrika",
+  articleLinks: [
+    { href: "/stati/teplyj-pol-vodyanoj-ili-elektrichesky", label: "Тёплый пол: водяной или электрический" },
+  ],
   eyebrow: "Электромонтажные работы",
   h1: "Электрик в Полоцке и Новополоцке — проводка, щиты, светильники",
   title: "Электрик на дом в Полоцке — замена проводки, щит, розетки",

@@ -8,6 +8,10 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "otdelka",
+  articleLinks: [
+    { href: "/stati/shtukaturka-sten-po-mayakam", label: "Штукатурка стен по маякам: технология и цена" },
+    { href: "/stati/poklejka-oboev", label: "Поклейка обоев: технология и этапы работ" },
+  ],
   eyebrow: "Отделочные работы",
   h1: "Отделочные работы в Полоцке и Новополоцке — штукатурка, обои, плитка",
   title: "Отделочные работы в Полоцке — штукатурка стен, поклейка обоев, плитка",

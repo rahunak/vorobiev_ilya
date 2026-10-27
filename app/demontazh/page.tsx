@@ -8,6 +8,9 @@ import type { ServicePageData } from "@/src/components/site/ServicePageParts";
 
 const d: ServicePageData = {
   slug: "demontazh",
+  articleLinks: [
+    { href: "/stati/remont-vannoj-v-hrushchevke", label: "Ремонт ванной в хрущевке: этапы от демонтажа" },
+  ],
   eyebrow: "Демонтажные работы",
   h1: "Демонтажные работы в Полоцке и Новополоцке — с вывозом мусора",
   title: "Демонтажные работы в Полоцке — цена, плитка, перегородки, стены",
